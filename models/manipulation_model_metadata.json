@@ -1,0 +1,58 @@
+{
+  "scam_only": true,
+  "results": {
+    "urgency": {
+      "precision": 0.991,
+      "recall": 0.987,
+      "f1": 0.989,
+      "train_positives": 5436
+    },
+    "fear": {
+      "precision": 0.987,
+      "recall": 0.969,
+      "f1": 0.978,
+      "train_positives": 2779
+    },
+    "authority_impersonation": {
+      "precision": 0.959,
+      "recall": 0.918,
+      "f1": 0.938,
+      "train_positives": 2801
+    },
+    "reward_bait": {
+      "precision": 0.994,
+      "recall": 0.969,
+      "f1": 0.981,
+      "train_positives": 8049
+    },
+    "financial_pressure": {
+      "precision": 0.982,
+      "recall": 0.928,
+      "f1": 0.955,
+      "train_positives": 4078
+    }
+  },
+  "source_holdout_f1": {
+    "Synthetic_Tier_C": {
+      "urgency": 0.283,
+      "fear": 0.51,
+      "authority_impersonation": 0.27,
+      "reward_bait": 0.522,
+      "financial_pressure": 0.31
+    },
+    "ysangam/Indian_Cyber_Scam_Hinglish": {
+      "urgency": 0.745,
+      "fear": 0.768,
+      "authority_impersonation": 0.654,
+      "reward_bait": 1.0,
+      "financial_pressure": 1.0
+    },
+    "Indian_Telecom_SMS": {
+      "urgency": 0.987,
+      "fear": 0.667,
+      "authority_impersonation": 0.779,
+      "reward_bait": 0.98,
+      "financial_pressure": 0.97
+    }
+  }
+}

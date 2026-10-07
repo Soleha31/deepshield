@@ -1,0 +1,57 @@
+[
+    {
+        "dataset": "sentinel_dataset_multiclass_clean.csv",
+        "purpose": "Scam type classification",
+        "rows": 14000,
+        "text_column": "text",
+        "label_column": "label",
+        "classes": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4"
+        ],
+        "accuracy": 0.9825,
+        "model": "scam_type_model.pkl"
+    },
+    {
+        "dataset": "agent_conversation_all.csv",
+        "purpose": "Cross-communication and conversation analysis",
+        "rows": 1600,
+        "text_column": "dialogue",
+        "label_column": "labels",
+        "classes": [
+            "0",
+            "1"
+        ],
+        "accuracy": 1.0,
+        "model": "conversation_model.pkl"
+    },
+    {
+        "dataset": "GCT_phase1_100k.csv",
+        "purpose": "Adaptive manipulation and social engineering",
+        "rows": 35171,
+        "text_column": "text_transcript",
+        "label_column": "human_verified_label",
+        "classes": [
+            "0",
+            "1"
+        ],
+        "accuracy": 0.4978,
+        "model": "manipulation_model.pkl"
+    },
+    {
+        "dataset": "India_Cyber_Scam_Hinglish_Dataset.csv",
+        "purpose": "Hindi/Hinglish/Indian scam language",
+        "rows": 743,
+        "text_column": "text",
+        "label_column": "label",
+        "classes": [
+            "0",
+            "1"
+        ],
+        "accuracy": 1.0,
+        "model": "hinglish_model.pkl"
+    }
+]

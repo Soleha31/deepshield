@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DeepShield | AI Scam Detection</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">🛡️</div>
+
+            <div>
+                <h2>DeepShield</h2>
+                <span>AI Scam Detection</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="{{ url_for('index') }}"
+               class="nav-item active">
+                <span>⌂</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="{{ url_for('analyze_page') }}"
+               class="nav-item">
+                <span>＋</span>
+                <span>Analyze Call</span>
+            </a>
+
+            <a href="{{ url_for('history') }}"
+               class="nav-item">
+                <span>◷</span>
+                <span>History</span>
+            </a>
+
+            <a href="{{ url_for('reports') }}"
+               class="nav-item">
+                <span>▤</span>
+                <span>Reports</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="stay-aware">
+                <div class="aware-icon">💡</div>
+
+                <div>
+                    <strong>Stay Aware</strong>
+                    <p>
+                        Never share OTP, PIN or banking
+                        passwords with anyone.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div>
+                <p class="page-label">Dashboard</p>
+
+                <h1>
+                    Protect yourself from voice scams
+                </h1>
+
+                <p class="page-description">
+                    Analyze suspicious calls and identify
+                    scam patterns using AI.
+                </p>
+            </div>
+
+            <a href="{{ url_for('analyze_page') }}"
+               class="primary-button">
+
+                <span>＋</span>
+                Analyze New Call
+
+            </a>
+
+        </header>
+
+
+        <!-- HERO -->
+        <section class="dashboard-hero">
+
+            <div class="hero-content">
+
+                <span class="hero-badge">
+                    🛡 AI-Powered Protection
+                </span>
+
+                <h2>
+                    Detect suspicious conversations
+                    before it's too late.
+                </h2>
+
+                <p>
+                    DeepShield analyzes call conversations
+                    for scam intent, social engineering,
+                    impersonation and manipulation tactics.
+                </p>
+
+                <a href="{{ url_for('analyze_page') }}"
+                   class="hero-button">
+
+                    Start Analysis →
+
+                </a>
+
+            </div>
+
+            <div class="hero-shield">
+                🛡️
+            </div>
+
+        </section>
+
+
+        <!-- STAT CARDS -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+                    🔍
+                </div>
+
+                <div>
+                    <span class="stat-title">
+                        AI Analysis
+                    </span>
+
+                    <strong>
+                        Smart Detection
+                    </strong>
+
+                    <small>
+                        ML-powered scam analysis
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    ✓
+                </div>
+
+                <div>
+                    <span class="stat-title">
+                        Protection
+                    </span>
+
+                    <strong>
+                        Real-Time Risk
+                    </strong>
+
+                    <small>
+                        0–100 risk scoring
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+                    ⚠
+                </div>
+
+                <div>
+                    <span class="stat-title">
+                        Detection
+                    </span>
+
+                    <strong>
+                        Scam Patterns
+                    </strong>
+
+                    <small>
+                        Multiple manipulation tactics
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    ◷
+                </div>
+
+                <div>
+                    <span class="stat-title">
+                        Records
+                    </span>
+
+                    <strong>
+                        Call History
+                    </strong>
+
+                    <small>
+                        Automatically saved analyses
+                    </small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- HOW IT WORKS -->
+        <section class="content-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">
+                        HOW IT WORKS
+                    </span>
+
+                    <h2>
+                        Three simple steps
+                    </h2>
+
+                    <p>
+                        Analyze a suspicious conversation
+                        with DeepShield.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="steps-grid">
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <div class="step-icon">
+                        🎙️
+                    </div>
+
+                    <h3>
+                        Provide the call
+                    </h3>
+
+                    <p>
+                        Upload a call recording or provide
+                        the conversation transcript.
+                    </p>
+
+                </div>
+
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <div class="step-icon">
+                        🤖
+                    </div>
+
+                    <h3>
+                        AI analyzes it
+                    </h3>
+
+                    <p>
+                        DeepShield checks scam probability,
+                        intent and manipulation tactics.
+                    </p>
+
+                </div>
+
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <div class="step-icon">
+                        🛡️
+                    </div>
+
+                    <h3>
+                        Get your risk score
+                    </h3>
+
+                    <p>
+                        See a clear 0–100 risk score with
+                        evidence and safety recommendations.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SAFETY SECTION -->
+        <section class="safety-card">
+
+            <div class="safety-icon">
+                🛡️
+            </div>
+
+            <div class="safety-content">
+
+                <h3>
+                    Remember
+                </h3>
+
+                <p>
+                    Legitimate banks, government offices and
+                    companies will never ask you to share your
+                    OTP, UPI PIN, ATM PIN or password over a call.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="footer">
+
+            <span>
+                DeepShield
+            </span>
+
+            <span>
+                AI-Powered Voice Scam Detection
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+</body>
+</html>

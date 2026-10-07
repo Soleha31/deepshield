@@ -1,0 +1,53 @@
+{
+    "dataset": "datasets/GCT_phase1_100k.csv",
+    "model": "models\\manipulation_model.pkl",
+    "text_feature": "text_transcript",
+    "numeric_features": [
+        "sentiment_score",
+        "urgency_score",
+        "authority_claim",
+        "fear_trigger_score",
+        "trust_manipulation_score",
+        "cognitive_load_score",
+        "malicious_domain_score",
+        "response_time",
+        "message_frequency",
+        "conversation_length",
+        "interaction_entropy",
+        "financial_target",
+        "trust_signals",
+        "cognitive_distortion_score"
+    ],
+    "categorical_features": [
+        "country_code",
+        "language",
+        "channel",
+        "platform",
+        "audio_features",
+        "persuasion_strategy",
+        "social_engineering_pattern",
+        "device_type",
+        "network_type",
+        "url_domain",
+        "attack_type",
+        "attack_stage",
+        "attack_complexity"
+    ],
+    "label_column": "human_verified_label",
+    "classes": [
+        "0",
+        "1"
+    ],
+    "training_samples": 28459,
+    "testing_samples": 7115,
+    "accuracy": 0.4999297259311314,
+    "excluded_columns": [
+        "interaction_id",
+        "timestamp",
+        "ip_address_hash",
+        "model_prediction",
+        "confidence_score",
+        "CMS"
+    ],
+    "purpose": "DeepShield manipulation and social-engineering analysis"
+}

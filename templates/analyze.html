@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Analyze Call | DeepShield</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">🛡️</div>
+
+            <div>
+                <h2>DeepShield</h2>
+                <span>AI Scam Detection</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="{{ url_for('index') }}"
+               class="nav-item">
+                <span>⌂</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="{{ url_for('analyze_page') }}"
+               class="nav-item active">
+                <span>＋</span>
+                <span>Analyze Call</span>
+            </a>
+
+            <a href="{{ url_for('history') }}"
+               class="nav-item">
+                <span>◷</span>
+                <span>History</span>
+            </a>
+
+            <a href="{{ url_for('reports') }}"
+               class="nav-item">
+                <span>▤</span>
+                <span>Reports</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="stay-aware">
+
+                <div class="aware-icon">
+                    💡
+                </div>
+
+                <div>
+                    <strong>Stay Aware</strong>
+
+                    <p>
+                        Never share OTP, PIN or banking
+                        passwords with anyone.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div>
+
+                <p class="page-label">
+                    Analyze Call
+                </p>
+
+                <h1>
+                    Analyze a suspicious conversation
+                </h1>
+
+                <p class="page-description">
+                    Upload a call recording or enter the
+                    conversation transcript manually.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <!-- ANALYSIS FORM -->
+        <section class="analysis-container">
+
+            <form
+                action="{{ url_for('analyze') }}"
+                method="POST"
+                enctype="multipart/form-data"
+                id="analysisForm">
+
+
+                <!-- AUDIO UPLOAD -->
+                <div class="analysis-card">
+
+                    <div class="card-header">
+
+                        <div class="card-header-icon">
+                            🎙️
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                Call Recording
+                            </h2>
+
+                            <p>
+                                Upload an audio recording
+                                of the suspicious call.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="upload-box">
+
+                        <div class="upload-icon">
+                            ☁️
+                        </div>
+
+                        <h3>
+                            Upload call audio
+                        </h3>
+
+                        <p>
+                            MP3, WAV, M4A or other supported
+                            audio files
+                        </p>
+
+                        <label
+                            for="audio"
+                            class="secondary-button">
+
+                            Choose Audio File
+
+                        </label>
+
+                        <input
+                            type="file"
+                            id="audio"
+                            name="audio"
+                            accept="audio/*"
+                            hidden>
+
+                        <div
+                            id="fileName"
+                            class="file-name">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- OR -->
+                <div class="or-divider">
+
+                    <span>OR</span>
+
+                </div>
+
+
+                <!-- TRANSCRIPT -->
+                <div class="analysis-card">
+
+                    <div class="card-header">
+
+                        <div class="card-header-icon">
+                            📝
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                Conversation Transcript
+                            </h2>
+
+                            <p>
+                                Paste what the caller said.
+                                DeepShield will analyze it using AI.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="textarea-wrapper">
+
+                        <textarea
+                            name="transcript"
+                            id="transcript"
+                            rows="12"
+                            placeholder="Example:
+
+Your bank account will be blocked today.
+Tell me your OTP and UPI PIN immediately.
+If you do not provide it within 10 minutes,
+the police will take action.
+
+Paste the complete conversation here..."
+                        ></textarea>
+
+                        <div class="textarea-footer">
+
+                            <span id="characterCount">
+                                0 characters
+                            </span>
+
+                            <span>
+                                AI analysis enabled
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ANALYSIS INFO -->
+                <div class="info-card">
+
+                    <div class="info-icon">
+                        🤖
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            What DeepShield checks
+                        </h3>
+
+                        <p>
+                            The AI model checks scam probability,
+                            urgency, fear, authority impersonation,
+                            reward bait, financial pressure and
+                            suspicious phrases.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BUTTONS -->
+                <div class="form-actions">
+
+                    <a
+                        href="{{ url_for('index') }}"
+                        class="cancel-button">
+
+                        Cancel
+
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                        id="analyzeButton">
+
+                        <span>🔍</span>
+
+                        Analyze Conversation
+
+                    </button>
+
+                </div>
+
+
+                <!-- LOADING MESSAGE -->
+                <div
+                    id="loadingMessage"
+                    class="loading-card"
+                    style="display: none;">
+
+                    <div class="loading-spinner"></div>
+
+                    <div>
+
+                        <strong>
+                            DeepShield is analyzing...
+                        </strong>
+
+                        <p>
+                            Please wait while the AI models
+                            process the conversation.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- HOW ANALYSIS WORKS -->
+        <section class="content-section">
+
+            <div class="section-heading">
+
+                <span class="section-label">
+                    AI ANALYSIS
+                </span>
+
+                <h2>
+                    What happens after analysis?
+                </h2>
+
+            </div>
+
+
+            <div class="mini-steps">
+
+                <div class="mini-step">
+
+                    <span class="mini-step-number">
+                        1
+                    </span>
+
+                    <div>
+                        <strong>
+                            Speech to Text
+                        </strong>
+
+                        <p>
+                            Audio is converted into text
+                            using Whisper AI.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="mini-step">
+
+                    <span class="mini-step-number">
+                        2
+                    </span>
+
+                    <div>
+                        <strong>
+                            Scam Detection
+                        </strong>
+
+                        <p>
+                            The trained ML model calculates
+                            scam probability.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="mini-step">
+
+                    <span class="mini-step-number">
+                        3
+                    </span>
+
+                    <div>
+                        <strong>
+                            Risk Analysis
+                        </strong>
+
+                        <p>
+                            Manipulation tactics and suspicious
+                            evidence are identified.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="mini-step">
+
+                    <span class="mini-step-number">
+                        4
+                    </span>
+
+                    <div>
+                        <strong>
+                            Final Result
+                        </strong>
+
+                        <p>
+                            You receive a 0–100 risk score
+                            and safety recommendation.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SAFETY NOTE -->
+        <section class="safety-card">
+
+            <div class="safety-icon">
+                ⚠️
+            </div>
+
+            <div class="safety-content">
+
+                <h3>
+                    Important
+                </h3>
+
+                <p>
+                    DeepShield is an AI-based assistance tool.
+                    Always verify suspicious requests directly
+                    with your bank, company or official authority.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="footer">
+
+            <span>
+                DeepShield
+            </span>
+
+            <span>
+                AI-Powered Voice Scam Detection
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script>
+
+    // Show selected audio filename
+    const audioInput = document.getElementById("audio");
+    const fileName = document.getElementById("fileName");
+
+    if (audioInput) {
+
+        audioInput.addEventListener("change", function () {
+
+            if (this.files.length > 0) {
+
+                fileName.textContent =
+                    "Selected: " + this.files[0].name;
+
+            } else {
+
+                fileName.textContent = "";
+
+            }
+
+        });
+
+    }
+
+
+    // Character counter
+    const transcript =
+        document.getElementById("transcript");
+
+    const characterCount =
+        document.getElementById("characterCount");
+
+    if (transcript) {
+
+        transcript.addEventListener("input", function () {
+
+            characterCount.textContent =
+                this.value.length + " characters";
+
+        });
+
+    }
+
+
+    // Submit loading state
+    const form =
+        document.getElementById("analysisForm");
+
+    const analyzeButton =
+        document.getElementById("analyzeButton");
+
+    const loadingMessage =
+        document.getElementById("loadingMessage");
+
+
+    if (form) {
+
+        form.addEventListener("submit", function () {
+
+            analyzeButton.disabled = true;
+
+            analyzeButton.innerHTML =
+                "⏳ Analyzing...";
+
+            loadingMessage.style.display =
+                "flex";
+
+        });
+
+    }
+
+</script>
+
+</body>
+</html>

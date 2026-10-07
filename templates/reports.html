@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reports | DeepShield</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🛡️
+            </div>
+
+            <div>
+                <h2>DeepShield</h2>
+                <span>AI Scam Detection</span>
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="{{ url_for('index') }}"
+               class="nav-item">
+
+                <span>⌂</span>
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a href="{{ url_for('analyze_page') }}"
+               class="nav-item">
+
+                <span>＋</span>
+                <span>Analyze Call</span>
+
+            </a>
+
+
+            <a href="{{ url_for('history') }}"
+               class="nav-item">
+
+                <span>◷</span>
+                <span>History</span>
+
+            </a>
+
+
+            <a href="{{ url_for('reports') }}"
+               class="nav-item active">
+
+                <span>▤</span>
+                <span>Reports</span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="stay-aware">
+
+                <div class="aware-icon">
+                    💡
+                </div>
+
+                <div>
+
+                    <strong>
+                        Stay Aware
+                    </strong>
+
+                    <p>
+                        Never share OTP, PIN or banking
+                        passwords with anyone.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div>
+
+                <p class="page-label">
+                    Reports
+                </p>
+
+                <h1>
+                    Analysis Reports
+                </h1>
+
+                <p class="page-description">
+                    Review your DeepShield analysis records
+                    and generate detailed reports.
+                </p>
+
+            </div>
+
+
+            <a href="{{ url_for('analyze_page') }}"
+               class="primary-button">
+
+                <span>＋</span>
+                New Analysis
+
+            </a>
+
+        </header>
+
+
+
+        <!-- REPORT INTRO -->
+        <section class="report-hero">
+
+            <div class="report-hero-icon">
+                📊
+            </div>
+
+            <div>
+
+                <span class="section-label">
+                    DEEPSHIELD REPORTING
+                </span>
+
+                <h2>
+                    Understand every AI analysis
+                </h2>
+
+                <p>
+                    Your analysis results can be reviewed
+                    from the history section and exported
+                    as detailed reports.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- REPORT CONTENT -->
+        {% if reports %}
+
+            <section class="reports-card">
+
+
+                <div class="history-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            AVAILABLE REPORTS
+                        </span>
+
+                        <h2>
+                            Analysis Reports
+                        </h2>
+
+                    </div>
+
+
+                    <div class="history-count">
+
+                        {{ reports|length }}
+
+                        <span>
+                            Reports
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- REPORT LIST -->
+                <div class="report-list">
+
+
+                    {% for item in reports %}
+
+                        <div class="report-item">
+
+
+                            <!-- ICON -->
+                            <div class="report-item-icon">
+
+                                {% if item.scam_detected %}
+                                    ⚠️
+                                {% else %}
+                                    ✓
+                                {% endif %}
+
+                            </div>
+
+
+
+                            <!-- DETAILS -->
+                            <div class="report-details">
+
+                                <h3>
+
+                                    {% if item.filename %}
+
+                                        {{ item.filename }}
+
+                                    {% else %}
+
+                                        Call Analysis
+
+                                    {% endif %}
+
+                                </h3>
+
+
+                                <p>
+
+                                    {{ item.created_at }}
+
+                                </p>
+
+
+                                <div class="report-tags">
+
+
+                                    {% if item.scam_detected %}
+
+                                        <span class="status-badge danger">
+                                            Scam Detected
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="status-badge safe">
+                                            No Strong Scam Pattern
+                                        </span>
+
+                                    {% endif %}
+
+
+                                    <span class="report-risk">
+
+                                        Risk:
+                                        {{ item.risk_score }}/100
+
+                                    </span>
+
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- ACTIONS -->
+                            <div class="report-actions">
+
+
+                                {% if item.id %}
+
+                                    <a
+                                        href="{{ url_for('result', analysis_id=item.id) }}"
+                                        class="view-button">
+
+                                        View Result
+
+                                    </a>
+
+
+                                    <a
+                                        href="{{ url_for('download_report', analysis_id=item.id) }}"
+                                        class="secondary-small-button">
+
+                                        PDF
+
+                                    </a>
+
+                                {% endif %}
+
+
+                            </div>
+
+
+                        </div>
+
+                    {% endfor %}
+
+
+                </div>
+
+            </section>
+
+
+        {% else %}
+
+
+            <!-- EMPTY STATE -->
+            <section class="reports-empty">
+
+                <div class="empty-icon">
+                    ▤
+                </div>
+
+                <h2>
+                    No reports available
+                </h2>
+
+                <p>
+                    Complete an analysis first. Your report
+                    will appear here automatically.
+                </p>
+
+
+                <a
+                    href="{{ url_for('analyze_page') }}"
+                    class="primary-button">
+
+                    Analyze a Call
+
+                </a>
+
+            </section>
+
+
+        {% endif %}
+
+
+
+        <!-- REPORT INFORMATION -->
+        <section class="content-section">
+
+
+            <div class="section-heading">
+
+                <span class="section-label">
+                    REPORT DETAILS
+                </span>
+
+                <h2>
+                    What does a DeepShield report contain?
+                </h2>
+
+                <p>
+                    Each analysis provides information that
+                    helps you understand why a conversation
+                    was considered suspicious.
+                </p>
+
+            </div>
+
+
+
+            <div class="report-feature-grid">
+
+
+                <!-- FEATURE 1 -->
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🎯
+                    </div>
+
+                    <h3>
+                        Risk Score
+                    </h3>
+
+                    <p>
+                        A 0–100 score representing the overall
+                        risk detected in the conversation.
+                    </p>
+
+                </div>
+
+
+
+                <!-- FEATURE 2 -->
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🤖
+                    </div>
+
+                    <h3>
+                        AI Probability
+                    </h3>
+
+                    <p>
+                        Shows the probability generated by
+                        the trained scam classification model.
+                    </p>
+
+                </div>
+
+
+
+                <!-- FEATURE 3 -->
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🧠
+                    </div>
+
+                    <h3>
+                        Manipulation Tactics
+                    </h3>
+
+                    <p>
+                        Shows detected urgency, fear,
+                        authority, reward and financial
+                        pressure patterns.
+                    </p>
+
+                </div>
+
+
+
+                <!-- FEATURE 4 -->
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🔎
+                    </div>
+
+                    <h3>
+                        Evidence
+                    </h3>
+
+                    <p>
+                        Highlights suspicious words,
+                        phrases and sentences found by AI.
+                    </p>
+
+                </div>
+
+
+
+                <!-- FEATURE 5 -->
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        📝
+                    </div>
+
+                    <h3>
+                        Transcript
+                    </h3>
+
+                    <p>
+                        Displays the conversation text used
+                        during the analysis.
+                    </p>
+
+                </div>
+
+
+
+                <!-- FEATURE 6 -->
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🛡️
+                    </div>
+
+                    <h3>
+                        Safety Advice
+                    </h3>
+
+                    <p>
+                        Provides practical recommendations
+                        for handling suspicious calls.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- SAFETY CARD -->
+        <section class="safety-card">
+
+            <div class="safety-icon">
+                🛡️
+            </div>
+
+
+            <div class="safety-content">
+
+                <h3>
+                    Important Safety Reminder
+                </h3>
+
+                <p>
+                    Never provide OTPs, UPI PINs, passwords,
+                    card PINs or other confidential information
+                    to an unknown caller.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- FOOTER -->
+        <footer class="footer">
+
+            <span>
+                DeepShield
+            </span>
+
+            <span>
+                AI-Powered Voice Scam Detection
+            </span>
+
+        </footer>
+
+
+    </main>
+
+</div>
+
+</body>
+</html>

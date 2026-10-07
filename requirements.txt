@@ -1,0 +1,11 @@
+Flask
+python-dotenv
+pymongo
+certifi
+joblib
+scikit-learn
+scipy
+reportlab
+faster-whisper
+# Optional for automatic audio transcription:
+# openai-whisper

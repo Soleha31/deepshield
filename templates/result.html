@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Analysis Result | DeepShield</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">🛡️</div>
+
+            <div>
+                <h2>DeepShield</h2>
+                <span>AI Scam Detection</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="{{ url_for('index') }}" class="nav-item">
+                <span>⌂</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="{{ url_for('analyze_page') }}" class="nav-item">
+                <span>＋</span>
+                <span>Analyze Call</span>
+            </a>
+
+            <a href="{{ url_for('history') }}" class="nav-item">
+                <span>◷</span>
+                <span>History</span>
+            </a>
+
+            <a href="{{ url_for('reports') }}" class="nav-item">
+                <span>▤</span>
+                <span>Reports</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="stay-aware">
+
+                <div class="aware-icon">
+                    💡
+                </div>
+
+                <div>
+                    <strong>Stay Aware</strong>
+
+                    <p>
+                        Never share OTP, PIN or banking
+                        passwords with anyone.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div>
+
+                <p class="page-label">
+                    Analysis Result
+                </p>
+
+                <h1>
+                    AI Call Analysis
+                </h1>
+
+                <p class="page-description">
+                    DeepShield has analyzed the conversation
+                    using trained machine-learning models.
+                </p>
+
+            </div>
+
+            <a href="{{ url_for('analyze_page') }}"
+               class="primary-button">
+
+                ＋ New Analysis
+
+            </a>
+
+        </header>
+
+
+        <!-- RESULT STATUS -->
+        <section class="result-status
+            {% if result.scam_detected %}
+                danger
+            {% else %}
+                safe
+            {% endif %}">
+
+            <div class="result-status-icon">
+
+                {% if result.scam_detected %}
+                    ⚠️
+                {% else %}
+                    ✓
+                {% endif %}
+
+            </div>
+
+            <div class="result-status-content">
+
+                {% if result.scam_detected %}
+
+                    <span class="result-status-label">
+                        AI WARNING
+                    </span>
+
+                    <h2>
+                        SCAM PATTERN DETECTED
+                    </h2>
+
+                    <p>
+                        The conversation contains signals
+                        associated with suspicious or scam-like
+                        behavior.
+                    </p>
+
+                {% else %}
+
+                    <span class="result-status-label">
+                        AI RESULT
+                    </span>
+
+                    <h2>
+                        NO STRONG SCAM PATTERN
+                    </h2>
+
+                    <p>
+                        The AI did not find strong evidence
+                        of a scam in this conversation.
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <!-- RISK SCORE -->
+        <section class="result-grid">
+
+            <div class="risk-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            OVERALL RISK
+                        </span>
+
+                        <h2>
+                            Risk Score
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="risk-score-container">
+
+                    <div class="risk-score-circle
+                        {% if result.risk_score >= 70 %}
+                            high
+                        {% elif result.risk_score >= 40 %}
+                            medium
+                        {% else %}
+                            low
+                        {% endif %}">
+
+                        <div class="risk-score-number">
+                            {{ result.risk_score }}
+                        </div>
+
+                        <div class="risk-score-total">
+                            / 100
+                        </div>
+
+                    </div>
+
+                    <div class="risk-details">
+
+                        <span class="risk-label">
+                            RISK LEVEL
+                        </span>
+
+                        <strong>
+                            {{ result.risk_level }}
+                        </strong>
+
+                        <p>
+                            Based on scam probability,
+                            manipulation tactics and
+                            detected evidence.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SCAM PROBABILITY -->
+            <div class="probability-card">
+
+                <span class="section-label">
+                    AI CONFIDENCE
+                </span>
+
+                <h2>
+                    Scam Probability
+                </h2>
+
+                <div class="probability-value">
+
+                    {{ result.scam_probability }}%
+
+                </div>
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress-fill"
+                        style="width: {{ result.scam_probability }}%;">
+                    </div>
+
+                </div>
+
+                <p>
+                    Probability generated by the trained
+                    scam classification model.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- DETECTION SUMMARY -->
+        <section class="analysis-card">
+
+            <div class="card-header">
+
+                <div class="card-header-icon">
+                    🤖
+                </div>
+
+                <div>
+
+                    <h2>
+                        Detection Summary
+                    </h2>
+
+                    <p>
+                        What DeepShield detected in this
+                        conversation.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-box">
+
+                <h3>
+                    {{ result.scam_type }}
+                </h3>
+
+                <p>
+                    {{ result.summary }}
+                </p>
+
+            </div>
+
+
+            <div class="detection-grid">
+
+                <div class="detection-item">
+
+                    <span>
+                        Scam Intent
+                    </span>
+
+                    <strong>
+                        {{ result.scam_intent }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detection-item">
+
+                    <span>
+                        Social Engineering
+                    </span>
+
+                    <strong>
+                        {{ result.social_engineering }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detection-item">
+
+                    <span>
+                        Impersonation
+                    </span>
+
+                    <strong>
+                        {{ result.impersonation }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detection-item">
+
+                    <span>
+                        Language
+                    </span>
+
+                    <strong>
+                        {{ result.language }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MANIPULATION TACTICS -->
+        <section class="analysis-card">
+
+            <div class="card-header">
+
+                <div class="card-header-icon">
+                    🧠
+                </div>
+
+                <div>
+
+                    <h2>
+                        Manipulation Tactics
+                    </h2>
+
+                    <p>
+                        Social-engineering patterns detected
+                        by the manipulation model.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            {% if result.manipulation_tactics %}
+
+                <div class="tactics-grid">
+
+                    {% for tactic in result.manipulation_tactics %}
+
+                        <div class="tactic-item">
+
+                            <span class="tactic-icon">
+                                ⚠
+                            </span>
+
+                            <span>
+                                {{ tactic }}
+                            </span>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="empty-small">
+
+                    <span>✓</span>
+
+                    No strong manipulation tactics detected.
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- EVIDENCE -->
+        <section class="analysis-card">
+
+            <div class="card-header">
+
+                <div class="card-header-icon">
+                    🔎
+                </div>
+
+                <div>
+
+                    <h2>
+                        Suspicious Evidence
+                    </h2>
+
+                    <p>
+                        Specific words or phrases that
+                        contributed to the analysis.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            {% if result.evidence_phrases %}
+
+                <div class="evidence-list">
+
+                    {% for phrase in result.evidence_phrases %}
+
+                        <div class="evidence-item">
+
+                            <span class="evidence-mark">
+                                ⚠
+                            </span>
+
+                            <span>
+                                {{ phrase }}
+                            </span>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% elif result.evidence %}
+
+                <div class="evidence-list">
+
+                    {% for item in result.evidence %}
+
+                        <div class="evidence-item">
+
+                            <span class="evidence-mark">
+                                ⚠
+                            </span>
+
+                            <span>
+                                {{ item }}
+                            </span>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="empty-small">
+
+                    <span>✓</span>
+
+                    No specific suspicious phrases were
+                    extracted.
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- SUSPICIOUS SENTENCES -->
+        <section class="analysis-card">
+
+            <div class="card-header">
+
+                <div class="card-header-icon">
+                    📌
+                </div>
+
+                <div>
+
+                    <h2>
+                        Most Suspicious Sentences
+                    </h2>
+
+                    <p>
+                        Sentences receiving the strongest
+                        scam signals from the AI model.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            {% if result.suspicious_sentences %}
+
+                <div class="sentence-list">
+
+                    {% for sentence in result.suspicious_sentences %}
+
+                        <div class="suspicious-sentence">
+
+                            <div class="sentence-top">
+
+                                <span class="sentence-number">
+                                    {{ loop.index }}
+                                </span>
+
+                                <span class="sentence-score">
+                                    {{ sentence.scam_probability }}%
+                                    scam probability
+                                </span>
+
+                            </div>
+
+                            <p>
+                                "{{ sentence.text }}"
+                            </p>
+
+
+                            {% if sentence.tactics %}
+
+                                <div class="sentence-tactics">
+
+                                    {% for tactic in sentence.tactics %}
+
+                                        <span>
+                                            {{ tactic }}
+                                        </span>
+
+                                    {% endfor %}
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="empty-small">
+
+                    No highly suspicious sentences were
+                    identified.
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- TRANSCRIPT -->
+        <section class="analysis-card">
+
+            <div class="card-header">
+
+                <div class="card-header-icon">
+                    📝
+                </div>
+
+                <div>
+
+                    <h2>
+                        Call Transcript
+                    </h2>
+
+                    <p>
+                        What the caller said after speech
+                        transcription.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="transcript-box">
+
+                {% if result.highlighted_transcript %}
+
+                    {{ result.highlighted_transcript | safe }}
+
+                {% else %}
+
+                    {{ result.transcript }}
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <!-- RECOMMENDATIONS -->
+        <section class="recommendation-card">
+
+            <div class="recommendation-icon">
+                🛡️
+            </div>
+
+            <div>
+
+                <span class="section-label">
+                    SAFETY RECOMMENDATIONS
+                </span>
+
+                <h2>
+                    What should you do?
+                </h2>
+
+                {% if result.recommendations %}
+
+                    <ul>
+
+                        {% for recommendation in result.recommendations %}
+
+                            <li>
+                                {{ recommendation }}
+                            </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                {% else %}
+
+                    <ul>
+
+                        <li>
+                            Do not share OTP, PIN or passwords.
+                        </li>
+
+                        <li>
+                            Verify suspicious requests through
+                            official channels.
+                        </li>
+
+                        <li>
+                            End the call if the caller pressures
+                            you to make an immediate payment.
+                        </li>
+
+                    </ul>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <!-- ACTION BUTTONS -->
+        <div class="result-actions">
+
+            <a
+                href="{{ url_for('analyze_page') }}"
+                class="secondary-button">
+
+                Analyze Another Call
+
+            </a>
+
+            <a
+                href="{{ url_for('history') }}"
+                class="secondary-button">
+
+                View History
+
+            </a>
+
+            <a
+                href="{{ url_for('reports') }}"
+                class="primary-button">
+
+                View Reports
+
+            </a>
+
+        </div>
+
+
+        <!-- FOOTER -->
+        <footer class="footer">
+
+            <span>
+                DeepShield
+            </span>
+
+            <span>
+                AI-Powered Voice Scam Detection
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+</body>
+</html>

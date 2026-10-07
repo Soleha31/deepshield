@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>History | DeepShield</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">🛡️</div>
+
+            <div>
+                <h2>DeepShield</h2>
+                <span>AI Scam Detection</span>
+            </div>
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="{{ url_for('index') }}"
+               class="nav-item">
+
+                <span>⌂</span>
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a href="{{ url_for('analyze_page') }}"
+               class="nav-item">
+
+                <span>＋</span>
+                <span>Analyze Call</span>
+
+            </a>
+
+
+            <a href="{{ url_for('history') }}"
+               class="nav-item active">
+
+                <span>◷</span>
+                <span>History</span>
+
+            </a>
+
+
+            <a href="{{ url_for('reports') }}"
+               class="nav-item">
+
+                <span>▤</span>
+                <span>Reports</span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="stay-aware">
+
+                <div class="aware-icon">
+                    💡
+                </div>
+
+                <div>
+
+                    <strong>
+                        Stay Aware
+                    </strong>
+
+                    <p>
+                        Never share OTP, PIN or banking
+                        passwords with anyone.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div>
+
+                <p class="page-label">
+                    Call History
+                </p>
+
+                <h1>
+                    Previous Analyses
+                </h1>
+
+                <p class="page-description">
+                    View previously analyzed conversations
+                    and their AI risk results.
+                </p>
+
+            </div>
+
+
+            <a href="{{ url_for('analyze_page') }}"
+               class="primary-button">
+
+                <span>＋</span>
+                Analyze New Call
+
+            </a>
+
+        </header>
+
+
+
+        <!-- HISTORY CARD -->
+        <section class="history-card">
+
+
+            <div class="history-header">
+
+                <div>
+
+                    <span class="section-label">
+                        ANALYSIS RECORDS
+                    </span>
+
+                    <h2>
+                        Your Call History
+                    </h2>
+
+                </div>
+
+
+                <div class="history-count">
+
+                    {{ history|length }}
+
+                    <span>
+                        Analyses
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            {% if history %}
+
+
+                <!-- TABLE -->
+                <div class="history-table-wrapper">
+
+                    <table class="history-table">
+
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Date
+                                </th>
+
+                                <th>
+                                    Recording
+                                </th>
+
+                                <th>
+                                    Result
+                                </th>
+
+                                <th>
+                                    Risk Score
+                                </th>
+
+                                <th>
+                                    Probability
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+
+                        <tbody>
+
+
+                            {% for item in history %}
+
+                            <tr>
+
+
+                                <!-- DATE -->
+                                <td>
+
+                                    <div class="date-cell">
+
+                                        <strong>
+                                            {{ item.created_at }}
+                                        </strong>
+
+                                    </div>
+
+                                </td>
+
+
+
+                                <!-- RECORDING -->
+                                <td>
+
+                                    <div class="recording-cell">
+
+                                        <div class="recording-icon">
+                                            🎙️
+                                        </div>
+
+                                        <div>
+
+                                            <strong>
+                                                {% if item.filename %}
+                                                    {{ item.filename }}
+                                                {% else %}
+                                                    Conversation Analysis
+                                                {% endif %}
+                                            </strong>
+
+                                            <span>
+                                                DeepShield AI Analysis
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+
+                                <!-- RESULT -->
+                                <td>
+
+                                    {% if item.scam_detected %}
+
+                                        <span class="status-badge danger">
+                                            ⚠ Scam Detected
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="status-badge safe">
+                                            ✓ No Strong Scam Pattern
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+
+
+                                <!-- RISK -->
+                                <td>
+
+                                    <div class="table-risk">
+
+                                        <strong
+                                            class="
+                                            {% if item.risk_score >= 70 %}
+                                                risk-high
+                                            {% elif item.risk_score >= 40 %}
+                                                risk-medium
+                                            {% else %}
+                                                risk-low
+                                            {% endif %}
+                                            ">
+
+                                            {{ item.risk_score }}/100
+
+                                        </strong>
+
+
+                                        <div class="mini-progress">
+
+                                            <div
+                                                class="mini-progress-fill
+                                                {% if item.risk_score >= 70 %}
+                                                    high
+                                                {% elif item.risk_score >= 40 %}
+                                                    medium
+                                                {% else %}
+                                                    low
+                                                {% endif %}"
+                                                style="width: {{ item.risk_score }}%;">
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+
+                                <!-- PROBABILITY -->
+                                <td>
+
+                                    <strong>
+
+                                        {{ item.scam_probability }}%
+
+                                    </strong>
+
+                                </td>
+
+
+
+                                <!-- ACTION -->
+                                <td>
+
+                                    {% if item.id %}
+
+                                        <a
+                                            href="{{ url_for('result', analysis_id=item.id) }}"
+                                            class="view-button">
+
+                                            View →
+
+                                        </a>
+
+                                    {% else %}
+
+                                        <span class="muted-text">
+                                            —
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+
+                            </tr>
+
+                            {% endfor %}
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+            {% else %}
+
+
+                <!-- EMPTY STATE -->
+                <div class="history-empty">
+
+                    <div class="empty-icon">
+                        ◷
+                    </div>
+
+                    <h2>
+                        No analyses yet
+                    </h2>
+
+                    <p>
+                        Your analyzed calls will appear here
+                        automatically after you run your first
+                        DeepShield analysis.
+                    </p>
+
+
+                    <a
+                        href="{{ url_for('analyze_page') }}"
+                        class="primary-button">
+
+                        Analyze Your First Call
+
+                    </a>
+
+                </div>
+
+
+            {% endif %}
+
+        </section>
+
+
+
+        <!-- INFORMATION -->
+        <section class="info-card">
+
+
+            <div class="info-icon">
+                💾
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Analysis History
+                </h3>
+
+                <p>
+                    Every completed analysis is stored so you
+                    can review the risk score, scam probability,
+                    suspicious evidence and transcript later.
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- SAFETY CARD -->
+        <section class="safety-card">
+
+            <div class="safety-icon">
+                🛡️
+            </div>
+
+
+            <div class="safety-content">
+
+                <h3>
+                    Stay Safe
+                </h3>
+
+                <p>
+                    If DeepShield identifies a high-risk
+                    conversation, do not share financial
+                    information. Verify the caller through
+                    an official channel.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- FOOTER -->
+        <footer class="footer">
+
+            <span>
+                DeepShield
+            </span>
+
+            <span>
+                AI-Powered Voice Scam Detection
+            </span>
+
+        </footer>
+
+
+    </main>
+
+</div>
+
+</body>
+</html>

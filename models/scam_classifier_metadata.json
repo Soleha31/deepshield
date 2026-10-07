@@ -1,0 +1,60 @@
+{
+  "sources": [
+    "agent_conversation",
+    "icfd_cross_domain",
+    "icfd_main",
+    "india_hinglish",
+    "sentinel",
+    "ss:Benchmark_Ground_Truth",
+    "ss:Indian_Telecom_SMS",
+    "ss:Kaggle_Hindi_Merged",
+    "ss:Smishing_Dataset",
+    "ss:Synthetic_Tier_C",
+    "ss:UCI_SMS_Spam"
+  ],
+  "rows_used": 46510,
+  "holdout_results": {
+    "agent_conversation": {
+      "accuracy": 0.8819,
+      "macro_f1": 0.8804
+    },
+    "india_hinglish": {
+      "accuracy": 0.5666,
+      "macro_f1": 0.5324
+    },
+    "sentinel": {
+      "accuracy": 0.7147,
+      "macro_f1": 0.6939
+    },
+    "icfd_main": {
+      "accuracy": 0.8465,
+      "macro_f1": 0.4795
+    },
+    "icfd_cross_domain": {
+      "accuracy": 0.929,
+      "macro_f1": 0.5638
+    },
+    "ss:Indian_Telecom_SMS": {
+      "accuracy": 0.985,
+      "macro_f1": 0.9493
+    },
+    "ss:Kaggle_Hindi_Merged": {
+      "accuracy": 0.9479,
+      "macro_f1": 0.495
+    },
+    "ss:Smishing_Dataset": {
+      "accuracy": 0.933,
+      "macro_f1": 0.7857
+    },
+    "ss:Synthetic_Tier_C": {
+      "accuracy": 0.6141,
+      "macro_f1": 0.6061
+    },
+    "ss:UCI_SMS_Spam": {
+      "accuracy": 0.9972,
+      "macro_f1": 0.9645
+    }
+  },
+  "preprocess": "clean_text(): speaker tags hatao, url->urltoken, lowercase, digits->0",
+  "note": "Predict karne se pehle text ko train_model.clean_text() se clean karo."
+}
