@@ -9,3 +9,5 @@ reportlab
 faster-whisper
 # Optional for automatic audio transcription:
 # openai-whisper
+
+gunicorn
