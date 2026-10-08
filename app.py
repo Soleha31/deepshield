@@ -73,7 +73,12 @@ WHISPER_MODEL = None
  
 # [CHANGE] Whisper settings. Pehle "tiny" model aur auto language tha, jisse Hinglish
 # call ka transcript toota-phoota aata tha. Ye sab environment variable se badal sakte ho.
-WHISPER_MODEL_SIZE = os.environ.get("WHISPER_MODEL", "small")      # tiny / base / small / medium
+# [RENDER-SAFE] Render apni RENDER variable khud set karta hai. Wahan free instance par RAM kam hoti hai
+# (~512 MB), isliye default "tiny" model aur beam 1 rakha hai. Laptop par "small" aur beam 5.
+ON_RENDER = bool(os.environ.get("RENDER"))
+WHISPER_ENABLED = os.environ.get("WHISPER_ENABLED", "1") == "1"    # "0" = audio transcription band (sirf text paste)
+WHISPER_MODEL_SIZE = os.environ.get("WHISPER_MODEL", "tiny" if ON_RENDER else "small")   # tiny / base / small / medium
+WHISPER_BEAM = int(os.environ.get("WHISPER_BEAM", "1" if ON_RENDER else "5"))
 WHISPER_TASK = os.environ.get("WHISPER_TASK", "translate")         # translate = English text, transcribe = jo bola wahi
 WHISPER_LANGUAGE = os.environ.get("WHISPER_LANGUAGE", "hi")        # "hi" Hindi/Hinglish, "en" English, "auto" khud pehchane
 WHISPER_PROMPT = (
@@ -941,6 +946,15 @@ def transcribe_audio(path):
     global WHISPER_MODEL
  
  
+    if not WHISPER_ENABLED:
+ 
+        return (
+            "",
+            "Audio transcription is switched off on this server. "
+            "Please paste the transcript instead."
+        )
+ 
+ 
     if not WHISPER_AVAILABLE:
  
         return (
@@ -982,7 +996,7 @@ def transcribe_audio(path):
  
             task=WHISPER_TASK,
  
-            beam_size=5,
+            beam_size=WHISPER_BEAM,
  
             temperature=0.0,
  
@@ -2257,7 +2271,11 @@ if __name__ == "__main__":
  
     print(
         "Whisper:",
-        "AVAILABLE (" + WHISPER_MODEL_SIZE + ", " + WHISPER_TASK + ")"
+        (
+            "AVAILABLE (" + WHISPER_MODEL_SIZE + ", " + WHISPER_TASK + ")"
+            if WHISPER_ENABLED
+            else "SWITCHED OFF"
+        )
         if WHISPER_AVAILABLE
         else "NOT INSTALLED"
     )
@@ -2282,9 +2300,9 @@ if __name__ == "__main__":
  
         host="0.0.0.0",
  
-        port=8000,
+        port=int(os.environ.get("PORT", 8000)),
  
-        debug=True
+        debug=not ON_RENDER
  
     )
  
