@@ -56,17 +56,14 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 # OPTIONAL WHISPER
 # =========================================================
  
-try:
+# [RENDER-SAFE] faster_whisper ko start par import nahi karte (ye kaafi RAM leta hai, aur
+# chhote server par app boot hote hi mar sakta tha). Sirf check karte hain ki installed hai
+# ya nahi; asli import pehli audio request par hota hai.
+import importlib.util
  
-    from faster_whisper import WhisperModel
+WhisperModel = None
  
-    WHISPER_AVAILABLE = True
- 
-except ImportError:
- 
-    WhisperModel = None
- 
-    WHISPER_AVAILABLE = False
+WHISPER_AVAILABLE = importlib.util.find_spec("faster_whisper") is not None
  
  
 WHISPER_MODEL = None
@@ -967,6 +964,8 @@ def transcribe_audio(path):
     try:
  
         if WHISPER_MODEL is None:
+ 
+            from faster_whisper import WhisperModel
  
             print("Loading Whisper " + WHISPER_MODEL_SIZE + " model...")
  
