@@ -61,29 +61,39 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 # ya nahi; asli import pehli audio request par hota hai.
 import importlib.util
  
+
 WhisperModel = None
- 
+
 WHISPER_AVAILABLE = importlib.util.find_spec("faster_whisper") is not None
- 
- 
+
 WHISPER_MODEL = None
- 
-# [CHANGE] Whisper settings. Pehle "tiny" model aur auto language tha, jisse Hinglish
-# call ka transcript toota-phoota aata tha. Ye sab environment variable se badal sakte ho.
-# [RENDER-SAFE] Render apni RENDER variable khud set karta hai. Wahan free instance par RAM kam hoti hai
-# (~512 MB), isliye default "tiny" model aur beam 1 rakha hai. Laptop par "small" aur beam 5.
+
 ON_RENDER = bool(os.environ.get("RENDER"))
-WHISPER_ENABLED = os.environ.get("WHISPER_ENABLED", "1") == "1"    # "0" = audio transcription band (sirf text paste)
-WHISPER_MODEL_SIZE = os.environ.get("WHISPER_MODEL", "tiny" if ON_RENDER else "small")   # tiny / base / small / medium
-WHISPER_BEAM = int(os.environ.get("WHISPER_BEAM", "1" if ON_RENDER else "5"))
-WHISPER_TASK = os.environ.get("WHISPER_TASK", "translate")         # translate = English text, transcribe = jo bola wahi
-WHISPER_LANGUAGE = os.environ.get("WHISPER_LANGUAGE", "hi")        # "hi" Hindi/Hinglish, "en" English, "auto" khud pehchane
-WHISPER_PROMPT = (
-    "Namaste, main bank security team se bol raha hoon. "
-    "OTP, UPI PIN, KYC, account, transaction, verification."
+WHISPER_ENABLED = os.environ.get("WHISPER_ENABLED", "1") == "1"
+
+# Local PC: better accuracy. Railway: lower memory usage.
+WHISPER_MODEL_SIZE = os.environ.get(
+    "WHISPER_MODEL",
+    "tiny" if ON_RENDER else "small"
 )
- 
- 
+
+WHISPER_BEAM = int(os.environ.get(
+    "WHISPER_BEAM",
+    "1" if ON_RENDER else "3"
+))
+
+# Keep the original Hindi/Hinglish speech instead of translating it.
+WHISPER_TASK = os.environ.get("WHISPER_TASK", "transcribe")
+
+# Auto language detection is more suitable for mixed Hindi-English audio.
+WHISPER_LANGUAGE = os.environ.get("WHISPER_LANGUAGE", "auto")
+
+WHISPER_PROMPT = (
+    "Hindi and Hinglish conversation about bank security, "
+    "OTP, UPI PIN, KYC, bank account, transaction and verification. "
+    "Transcribe only words that are actually audible."
+)
+
 # =========================================================
 # LOAD MACHINE LEARNING MODELS
 # =========================================================
@@ -441,61 +451,65 @@ def model_probability(model, text):
         print("Model probability error:", exc)
  
         return 0.0
- 
- 
+
 # =========================================================
 # MANIPULATION MODEL
 # =========================================================
- 
+
 def manipulation_probabilities(text):
- 
     result = {key: 0.0 for key in TACTIC_LABELS}
- 
- 
+
     if manipulation_model is None:
- 
+        print("Manipulation model is not loaded.")
         return result
- 
- 
-    text = prepare_text(text, strip_speakers=False)
- 
-    if not text:
- 
-        return result
- 
- 
-    # [CHANGE] manipulation_model.pkl ek sklearn model nahi, ek dict hai:
-    #   {"word_vectorizer", "char_vectorizer", "classifiers": {tactic: model}, "tactics"}
-    # Isliye purana manipulation_model.predict_proba(...) hamesha fail hota tha aur
-    # saari tactics 0 aati thi. Ab har tactic ka apna classifier chalta hai.
+
     try:
- 
+        text = prepare_text(text, strip_speakers=False)
+        if not text:
+            return result
+
         from scipy.sparse import hstack
- 
+
+        word_vectorizer = manipulation_model["word_vectorizer"]
+        char_vectorizer = manipulation_model["char_vectorizer"]
+        classifiers = manipulation_model["classifiers"]
+
         features = hstack([
- 
-            manipulation_model["word_vectorizer"].transform([text]),
- 
-            manipulation_model["char_vectorizer"].transform([text])
- 
+            word_vectorizer.transform([text]),
+            char_vectorizer.transform([text])
         ]).tocsr()
- 
- 
-        for key, classifier in manipulation_model["classifiers"].items():
- 
-            if key in result:
- 
-                result[key] = float(classifier.predict_proba(features)[0][1])
- 
- 
+
+        for key, classifier in classifiers.items():
+            if key not in result:
+                result[key] = 0.0
+
+            if not hasattr(classifier, "predict_proba"):
+                print(f"{key}: predict_proba is unavailable")
+                continue
+
+            probabilities = classifier.predict_proba(features)[0]
+            classes = list(classifier.classes_)
+
+            positive_index = next(
+                (
+                    i for i, label in enumerate(classes)
+                    if str(label).strip().lower()
+                    in ("1", "true", "yes", "scam")
+                ),
+                None
+            )
+
+            if positive_index is None:
+                print(f"{key}: positive class not found. Classes={classes}")
+                continue
+
+            result[key] = float(probabilities[positive_index])
+
     except Exception as exc:
- 
-        print("Manipulation model error:", exc)
- 
- 
+        print(f"Manipulation model error: {type(exc).__name__}: {exc}")
+
     return result
- 
- 
+
 # =========================================================
 # EVIDENCE PHRASES
 # =========================================================
@@ -2295,13 +2309,11 @@ if __name__ == "__main__":
     print("")
  
  
-    app.run(
- 
-        host="0.0.0.0",
- 
-        port=int(os.environ.get("PORT", 8000)),
- 
-        debug=not ON_RENDER
- 
-    )
- 
+port = int(os.environ.get("PORT", 8000))
+
+app.run(
+    host="0.0.0.0",
+    port=port,
+    debug=False,
+    use_reloader=False
+)
