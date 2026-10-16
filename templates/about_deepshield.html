@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="resource-page">
+  <p class="eyebrow">YOUR VOICE. YOUR SAFETY.</p>
+
+  <h1>About DeepShield.</h1>
+
+  <p class="intro">
+    DeepShield is an AI-powered voice scam detection prototype
+    designed to help identify suspicious calls and social engineering.
+  </p>
+
+  <section class="resource-card">
+    <h2>What is DeepShield?</h2>
+    <p>
+      DeepShield analyzes available call recordings or transcripts
+      to identify possible scam patterns and suspicious requests.
+    </p>
+  </section>
+
+  <section class="resource-card">
+    <h2>How it works</h2>
+
+    <article class="tip">
+      <b>01</b>
+      <div>
+        <h3>Audio transcription</h3>
+        <p>Convert supported audio into text when transcription succeeds.</p>
+      </div>
+    </article>
+
+    <article class="tip">
+      <b>02</b>
+      <div>
+        <h3>Scam pattern analysis</h3>
+        <p>Analyze suspicious requests and manipulation tactics.</p>
+      </div>
+    </article>
+
+    <article class="tip">
+      <b>03</b>
+      <div>
+        <h3>Risk explanation</h3>
+        <p>Display available results, evidence and safety recommendations.</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="resource-card">
+    <h2>Important limitations</h2>
+    <p>
+      AI predictions may be incorrect. A low risk score does not
+      guarantee that a call is safe. Always verify suspicious claims.
+    </p>
+  </section>
+</div>
+{% endblock %}

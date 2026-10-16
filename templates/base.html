@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepShield | AI Scam Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="app">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">🛡️</div>
+            <div>
+                <h2>DeepShield</h2>
+                <span>AI Scam Detection</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="{{ url_for('index') }}" class="nav-item">
+                <span>⌂</span>
+                <span>Dashboard</span>
+            </a>
+            <a href="{{ url_for('analyze_page') }}" class="nav-item">
+                <span>＋</span>
+                <span>Analyze Call</span>
+            </a>
+            <a href="{{ url_for('history') }}" class="nav-item">
+                <span>◷</span>
+                <span>History</span>
+            </a>
+            <a href="{{ url_for('reports') }}" class="nav-item">
+                <span>▤</span>
+                <span>Reports</span>
+            </a>
+            <a href="{{ url_for('safety_centre') }}" class="nav-item">
+                <span>🛡️</span>
+                <span>Safety Centre</span>
+            </a>
+            <a href="{{ url_for('about_deepshield') }}" class="nav-item">
+                <span>ⓘ</span>
+                <span>About DeepShield</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="stay-aware">
+                <div class="aware-icon">💡</div>
+                <div>
+                    <strong>Stay Aware</strong>
+                    <p>Never share OTP, PIN or banking passwords with anyone.</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+</div>
+</body>
+</html>

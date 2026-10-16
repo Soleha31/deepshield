@@ -2804,3 +2804,100 @@ textarea {
     }
 
 }
+.resource-page {
+  max-width: 1050px;
+  margin: auto;
+  padding: 35px;
+  color: #172d50;
+}
+
+.eyebrow {
+  color: #315ff5;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.resource-page h1 {
+  font-size: 32px;
+  margin: 18px 0;
+}
+
+.intro {
+  color: #71809a;
+  line-height: 1.8;
+  max-width: 700px;
+  margin-bottom: 28px;
+}
+
+.emergency-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 25px;
+  margin-bottom: 20px;
+  border: 1px solid #d9e5ff;
+  border-radius: 12px;
+  background: #edf3ff;
+}
+
+.resource-card {
+  padding: 25px;
+  margin-bottom: 20px;
+  background: #fff;
+  border: 1px solid #e0e7f1;
+  border-radius: 12px;
+}
+
+.resource-card h2,
+.emergency-card h2 {
+  font-size: 19px;
+}
+
+.resource-card p,
+.emergency-card p {
+  color: #71809a;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.tip {
+  display: flex;
+  gap: 18px;
+  padding: 20px 0;
+  border-bottom: 1px solid #e1e8f2;
+}
+
+.tip:last-child {
+  border-bottom: none;
+}
+
+.tip b {
+  color: #315ff5;
+}
+
+.tip h3 {
+  font-size: 14px;
+  margin: 0 0 8px;
+}
+
+.call-button {
+  padding: 13px 18px;
+  background: #315ff5;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+@media (max-width: 650px) {
+  .resource-page {
+    padding: 20px 14px;
+  }
+
+  .emergency-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

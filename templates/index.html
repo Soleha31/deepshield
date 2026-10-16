@@ -1,80 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+﻿{% extends "base.html" %}
 
-    <title>DeepShield | AI Scam Detection</title>
-
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
-</head>
-
-<body>
-
-<div class="app">
-
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-
-        <div class="brand">
-            <div class="brand-icon">🛡️</div>
-
-            <div>
-                <h2>DeepShield</h2>
-                <span>AI Scam Detection</span>
-            </div>
-        </div>
-
-        <nav class="sidebar-nav">
-
-            <a href="{{ url_for('index') }}"
-               class="nav-item active">
-                <span>⌂</span>
-                <span>Dashboard</span>
-            </a>
-
-            <a href="{{ url_for('analyze_page') }}"
-               class="nav-item">
-                <span>＋</span>
-                <span>Analyze Call</span>
-            </a>
-
-            <a href="{{ url_for('history') }}"
-               class="nav-item">
-                <span>◷</span>
-                <span>History</span>
-            </a>
-
-            <a href="{{ url_for('reports') }}"
-               class="nav-item">
-                <span>▤</span>
-                <span>Reports</span>
-            </a>
-
-        </nav>
-
-        <div class="sidebar-bottom">
-
-            <div class="stay-aware">
-                <div class="aware-icon">💡</div>
-
-                <div>
-                    <strong>Stay Aware</strong>
-                    <p>
-                        Never share OTP, PIN or banking
-                        passwords with anyone.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-    </aside>
-
-
-    <!-- MAIN CONTENT -->
-    <main class="main-content">
+{% block content %}
 
         <!-- TOP BAR -->
         <header class="topbar">
@@ -95,7 +21,7 @@
             <a href="{{ url_for('analyze_page') }}"
                class="primary-button">
 
-                <span>＋</span>
+                <span>ï¼‹</span>
                 Analyze New Call
 
             </a>
@@ -109,7 +35,7 @@
             <div class="hero-content">
 
                 <span class="hero-badge">
-                    🛡 AI-Powered Protection
+                    ðŸ›¡ AI-Powered Protection
                 </span>
 
                 <h2>
@@ -126,14 +52,14 @@
                 <a href="{{ url_for('analyze_page') }}"
                    class="hero-button">
 
-                    Start Analysis →
+                    Start Analysis â†’
 
                 </a>
 
             </div>
 
             <div class="hero-shield">
-                🛡️
+                ðŸ›¡ï¸
             </div>
 
         </section>
@@ -145,7 +71,7 @@
             <div class="stat-card">
 
                 <div class="stat-icon blue">
-                    🔍
+                    ðŸ”
                 </div>
 
                 <div>
@@ -168,7 +94,7 @@
             <div class="stat-card">
 
                 <div class="stat-icon green">
-                    ✓
+                    âœ“
                 </div>
 
                 <div>
@@ -181,7 +107,7 @@
                     </strong>
 
                     <small>
-                        0–100 risk scoring
+                        0â€“100 risk scoring
                     </small>
                 </div>
 
@@ -191,7 +117,7 @@
             <div class="stat-card">
 
                 <div class="stat-icon orange">
-                    ⚠
+                    âš 
                 </div>
 
                 <div>
@@ -214,7 +140,7 @@
             <div class="stat-card">
 
                 <div class="stat-icon purple">
-                    ◷
+                    â—·
                 </div>
 
                 <div>
@@ -268,7 +194,7 @@
                     </div>
 
                     <div class="step-icon">
-                        🎙️
+                        ðŸŽ™ï¸
                     </div>
 
                     <h3>
@@ -290,7 +216,7 @@
                     </div>
 
                     <div class="step-icon">
-                        🤖
+                        ðŸ¤–
                     </div>
 
                     <h3>
@@ -312,7 +238,7 @@
                     </div>
 
                     <div class="step-icon">
-                        🛡️
+                        ðŸ›¡ï¸
                     </div>
 
                     <h3>
@@ -320,7 +246,7 @@
                     </h3>
 
                     <p>
-                        See a clear 0–100 risk score with
+                        See a clear 0â€“100 risk score with
                         evidence and safety recommendations.
                     </p>
 
@@ -335,7 +261,7 @@
         <section class="safety-card">
 
             <div class="safety-icon">
-                🛡️
+                ðŸ›¡ï¸
             </div>
 
             <div class="safety-content">
@@ -368,9 +294,5 @@
 
         </footer>
 
-    </main>
 
-</div>
-
-</body>
-</html>
+{% endblock %}

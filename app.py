@@ -1846,7 +1846,15 @@ def index():
  
     return render_template("index.html")
  
- 
+@app.route("/safety")
+def safety_centre():
+    return render_template("safety_centre.html")
+
+
+@app.route("/about")
+def about_deepshield():
+    return render_template("about_deepshield.html")
+
 # =========================================================
 # ANALYZE PAGE
 # =========================================================
@@ -2256,7 +2264,7 @@ def server_error(error):
  
     )
  
- 
+
 # =========================================================
 # RUN SERVER
 # =========================================================

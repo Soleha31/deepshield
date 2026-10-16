@@ -11,6 +11,7 @@ from markupsafe import Markup, escape
 from pymongo import MongoClient, DESCENDING
 from bson.objectid import ObjectId
 from bson.errors import InvalidId
+from flask import render_template
 
 try:
     from reportlab.lib.pagesizes import A4
@@ -607,6 +608,15 @@ def delete_report(report_id):
 @app.errorhandler(413)
 def too_large(_):
     return "Audio file is too large. Maximum size is 50 MB.", 413
+
+@app.route("/safety")
+def safety_centre():
+    return render_template("safety_centre.html")
+
+
+@app.route("/about")
+def about_deepshield():
+    return render_template("about_deepshield.html")
 
 if __name__ == "__main__":
     print("DeepShield started")
