@@ -72,10 +72,8 @@ ON_RENDER = bool(os.environ.get("RENDER"))
 WHISPER_ENABLED = os.environ.get("WHISPER_ENABLED", "1") == "1"
 
 # Local PC: better accuracy. Railway: lower memory usage.
-WHISPER_MODEL_SIZE = os.environ.get(
-    "WHISPER_MODEL",
-    "tiny" if ON_RENDER else "small"
-)
+WHISPER_MODEL_SIZE = "tiny"
+
 
 WHISPER_BEAM = int(os.environ.get(
     "WHISPER_BEAM",
