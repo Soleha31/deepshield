@@ -2901,3 +2901,7 @@ textarea {
     flex-direction: column;
   }
 }
+/* Dashboard SVG icon fix */
+.hero-shield svg, .stat-icon svg, .step-icon svg, .safety-icon svg { width: 1.4em; height: 1.4em; display: block; }
+.hero-shield svg { width: 3.5rem; height: 3.5rem; }
+.stat-icon.blue, .step-icon, .safety-icon { color: #2563eb; }

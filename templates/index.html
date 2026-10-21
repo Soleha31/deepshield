@@ -1,298 +1,210 @@
-﻿{% extends "base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 
         <!-- TOP BAR -->
         <header class="topbar">
-
             <div>
                 <p class="page-label">Dashboard</p>
-
-                <h1>
-                    Protect yourself from voice scams
-                </h1>
-
+                <h1>Protect yourself from voice scams</h1>
                 <p class="page-description">
-                    Analyze suspicious calls and identify
-                    scam patterns using AI.
+                    Analyze suspicious calls and identify scam patterns using AI.
                 </p>
             </div>
 
-            <a href="{{ url_for('analyze_page') }}"
-               class="primary-button">
-
-                <span>ï¼‹</span>
-                Analyze New Call
-
+            <a href="{{ url_for('analyze_page') }}" class="primary-button" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
+                <svg xmlns="http://w3.org" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>Analyze New Call</span>
             </a>
-
         </header>
 
 
         <!-- HERO -->
         <section class="dashboard-hero">
-
             <div class="hero-content">
-
                 <span class="hero-badge">
-                    ðŸ›¡ AI-Powered Protection
+                    <svg xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="m9 11 2 2 4-4"/>
+                    </svg>
+                    AI-Powered Protection
                 </span>
 
-                <h2>
-                    Detect suspicious conversations
-                    before it's too late.
-                </h2>
-
+                <h2>Detect suspicious conversations before it's too late.</h2>
                 <p>
-                    DeepShield analyzes call conversations
-                    for scam intent, social engineering,
+                    DeepShield analyzes call conversations for scam intent, social engineering,
                     impersonation and manipulation tactics.
                 </p>
 
-                <a href="{{ url_for('analyze_page') }}"
-                   class="hero-button">
-
-                    Start Analysis â†’
-
+                <a href="{{ url_for('analyze_page') }}" class="hero-button">
+                    Start Analysis &rarr;
                 </a>
-
             </div>
+<div class="hero-shield" style="width: 200px; height: 200px; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, #1e3a8a 0%, #0f172a 100%); border-radius: 50%; box-shadow: 0 15px 35px rgba(15, 23, 42, 0.3); border: 3px solid rgba(59, 130, 246, 0.2); overflow: hidden; margin-left: auto; margin-right: auto;">
+    <!-- Fixed & Balanced Cybersecurity Shield Vector Illustration -->
+    <svg xmlns="http://w3.org" viewBox="0 0 200 200" width="100%" height="100%">
+        <defs>
+            <!-- Cyan Glowing Gradient Effect -->
+            <linearGradient id="cyberGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#06b6d4" />
+                <stop offset="100%" stop-color="#3b82f6" />
+            </linearGradient>
+            <!-- Subtle Grid Pattern Background -->
+            <pattern id="cyberGrid" width="16" height="16" patternUnits="userSpaceOnUse">
+                <path d="M 16 0 L 0 0 0 16" fill="none" stroke="rgba(6, 182, 212, 0.08)" stroke-width="1"/>
+            </pattern>
+        </defs>
 
-            <div class="hero-shield">
-                ðŸ›¡ï¸
-            </div>
+        <!-- Grid Background inside Circle -->
+        <circle cx="100" cy="100" r="90" fill="url(#cyberGrid)" />
+
+        <!-- Outer Glowing Tech Circuits Ring -->
+        <circle cx="100" cy="100" r="82" fill="none" stroke="url(#cyberGlow)" stroke-width="2" stroke-dasharray="6 4" opacity="0.5" />
+        <circle cx="100" cy="100" r="74" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="2 5" opacity="0.4" />
+
+        <!-- Scaled Up Connection Node Lines (AI / ML Representation) -->
+        <path d="M45,100 L65,65 M155,100 L135,65 M100,40 L100,65 M100,160 L100,135 M45,100 L65,135 M155,100 L135,135" stroke="url(#cyberGlow)" stroke-width="1.5" opacity="0.6" stroke-linecap="round"/>
+        
+        <!-- Connection Pulse Dots -->
+        <circle cx="65" cy="65" r="3.5" fill="#06b6d4" />
+        <circle cx="135" cy="65" r="3.5" fill="#3b82f6" />
+        <circle cx="65" cy="135" r="3.5" fill="#3b82f6" />
+        <circle cx="135" cy="135" r="3.5" fill="#06b6d4" />
+
+        <!-- Central Secure Shield Core Diagram - SCALED LARGER (From 55-162 to 40-160 grid) -->
+        <g transform="translate(0, 0)">
+            <!-- Outer Shield Base shadow -->
+            <path d="M100,40 L160,60 V115 C160,155 100,175 100,175 C100,175 40,155 40,115 V60 Z" fill="rgba(15, 23, 42, 0.85)" stroke="url(#cyberGlow)" stroke-width="3.5" stroke-linejoin="round"/>
+            
+            <!-- Inner AI Circuit Matrix Core inside Shield -->
+            <path d="M100,53 L145,68 V112 C145,144 100,160 100,160 C100,160 55,144 55,112 V68 Z" fill="none" stroke="#3b82f6" stroke-width="1.5" opacity="0.4"/>
+            
+            <!-- Central Shield Secure Verification Check Node - Bold & Visible -->
+            <path d="M82,108 L95,122 L125,92" fill="none" stroke="#06b6d4" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round" />
+        </g>
+    </svg>
+</div>
 
         </section>
 
 
         <!-- STAT CARDS -->
         <section class="stats-grid">
-
             <div class="stat-card">
-
                 <div class="stat-icon blue">
-                    ðŸ”
+                    <svg xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="M12 8v8"/>
+                        <path d="M9 12h6"/>
+                    </svg>
                 </div>
-
                 <div>
-                    <span class="stat-title">
-                        AI Analysis
-                    </span>
-
-                    <strong>
-                        Smart Detection
-                    </strong>
-
-                    <small>
-                        ML-powered scam analysis
-                    </small>
+                    <span class="stat-title">AI Analysis</span>
+                    <strong>Smart Detection</strong>
+                    <small>ML-powered scam analysis</small>
                 </div>
-
             </div>
 
-
             <div class="stat-card">
-
                 <div class="stat-icon green">
-                    âœ“
+                    <svg xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="m9 11 2 2 4-4"/>
+                    </svg>
                 </div>
-
                 <div>
-                    <span class="stat-title">
-                        Protection
-                    </span>
-
-                    <strong>
-                        Real-Time Risk
-                    </strong>
-
-                    <small>
-                        0â€“100 risk scoring
-                    </small>
+                    <span class="stat-title">Protection</span>
+                    <strong>Real-Time Risk</strong>
+                    <small>0-100 risk scoring</small>
                 </div>
-
             </div>
 
-
             <div class="stat-card">
-
                 <div class="stat-icon orange">
-                    âš 
+                    <svg xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
                 </div>
-
                 <div>
-                    <span class="stat-title">
-                        Detection
-                    </span>
-
-                    <strong>
-                        Scam Patterns
-                    </strong>
-
-                    <small>
-                        Multiple manipulation tactics
-                    </small>
+                    <span class="stat-title">Detection</span>
+                    <strong>Scam Patterns</strong>
+                    <small>Multiple manipulation tactics</small>
                 </div>
-
             </div>
-
 
             <div class="stat-card">
-
                 <div class="stat-icon purple">
-                    â—·
+                    <svg xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="M10.5 8.5a2.5 2.5 0 0 1 3 0c.5.5.5 1.5 0 2l-1.5 1.5c-.3.3-.3.8 0 1.1l1 1c.3.3.8.3 1.1 0l1.5-1.5c.5-.5 1.5-.5 2 0a2.5 2.5 0 0 1 0 3.5l-1 1c-2.5 2.5-6.5.5-8.5-1.5s-4-6-1.5-8.5l1-1z" transform="scale(0.6) translate(8, 7)"/>
+                    </svg>
                 </div>
-
                 <div>
-                    <span class="stat-title">
-                        Records
-                    </span>
-
-                    <strong>
-                        Call History
-                    </strong>
-
-                    <small>
-                        Automatically saved analyses
-                    </small>
+                    <span class="stat-title">Records</span>
+                    <strong>Call History</strong>
+                    <small>Automatically saved analyses</small>
                 </div>
-
             </div>
-
         </section>
 
 
         <!-- HOW IT WORKS -->
         <section class="content-section">
-
             <div class="section-heading">
-
                 <div>
-                    <span class="section-label">
-                        HOW IT WORKS
-                    </span>
-
-                    <h2>
-                        Three simple steps
-                    </h2>
-
-                    <p>
-                        Analyze a suspicious conversation
-                        with DeepShield.
-                    </p>
+                    <span class="section-label">HOW IT WORKS</span>
+                    <h2>Three simple steps</h2>
+                    <p>Analyze a suspicious conversation with DeepShield.</p>
                 </div>
-
             </div>
-
 
             <div class="steps-grid">
-
+                <!-- STEP 1 -->
                 <div class="step-card">
-
-                    <div class="step-number">
-                        01
-                    </div>
-
+                    <div class="step-number">01</div>
                     <div class="step-icon">
-                        ðŸŽ™ï¸
+                        <svg xmlns="http://w3.org" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <path d="M10.5 8.5a2.5 2.5 0 0 1 3 0c.5.5.5 1.5 0 2l-1.5 1.5c-.3.3-.3.8 0 1.1l1 1c.3.3.8.3 1.1 0l1.5-1.5c.5-.5 1.5-.5 2 0a2.5 2.5 0 0 1 0 3.5l-1 1c-2.5 2.5-6.5.5-8.5-1.5s-4-6-1.5-8.5l1-1z" transform="scale(0.6) translate(8, 7)"/>
+                        </svg>
                     </div>
-
-                    <h3>
-                        Provide the call
-                    </h3>
-
-                    <p>
-                        Upload a call recording or provide
-                        the conversation transcript.
-                    </p>
-
+                    <h3>Provide the call</h3>
+                    <p>Upload a call recording or provide the conversation transcript.</p>
                 </div>
 
-
+                <!-- STEP 2 -->
                 <div class="step-card">
-
-                    <div class="step-number">
-                        02
-                    </div>
-
+                    <div class="step-number">02</div>
                     <div class="step-icon">
-                        ðŸ¤–
+                        <svg xmlns="http://w3.org" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                        </svg>
                     </div>
-
-                    <h3>
-                        AI analyzes it
-                    </h3>
-
-                    <p>
-                        DeepShield checks scam probability,
-                        intent and manipulation tactics.
-                    </p>
-
+                    <h3>AI Run Analysis</h3>
+                    <p>Our advanced ML algorithms scan the patterns for suspicious behaviour.</p>
                 </div>
 
-
+                <!-- STEP 3 -->
                 <div class="step-card">
-
-                    <div class="step-number">
-                        03
-                    </div>
-
+                    <div class="step-number">03</div>
                     <div class="step-icon">
-                        ðŸ›¡ï¸
+                        <svg xmlns="http://w3.org" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
                     </div>
-
-                    <h3>
-                        Get your risk score
-                    </h3>
-
-                    <p>
-                        See a clear 0â€“100 risk score with
-                        evidence and safety recommendations.
-                    </p>
-
+                    <h3>Get Scam Report</h3>
+                    <p>Receive an instant risk score breakdown and safety advice dashboard.</p>
                 </div>
-
             </div>
-
         </section>
-
-
-        <!-- SAFETY SECTION -->
-        <section class="safety-card">
-
-            <div class="safety-icon">
-                ðŸ›¡ï¸
-            </div>
-
-            <div class="safety-content">
-
-                <h3>
-                    Remember
-                </h3>
-
-                <p>
-                    Legitimate banks, government offices and
-                    companies will never ask you to share your
-                    OTP, UPI PIN, ATM PIN or password over a call.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- FOOTER -->
-        <footer class="footer">
-
-            <span>
-                DeepShield
-            </span>
-
-            <span>
-                AI-Powered Voice Scam Detection
-            </span>
-
-        </footer>
-
 
 {% endblock %}
